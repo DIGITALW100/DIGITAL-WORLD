@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account Created Successfully</title>
+<title>Login Successful</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -12,7 +12,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#fff;
+    background:#f0f0f0;
     font-family:Poppins,sans-serif;
     overflow:hidden;
     position:relative;
@@ -21,7 +21,7 @@
     position:absolute;
     width:10px;
     height:10px;
-    background:linear-gradient(45deg,#ff00cc,#3333ff);
+    background:linear-gradient(45deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
     opacity:0.8;
     animation:fall 5s linear infinite;
   }
@@ -29,7 +29,7 @@
     0%{transform:translateY(-50px) rotate(0deg);}
     100%{transform:translateY(110vh) rotate(360deg);}
   }
-  .success-box{
+  .login-success-box{
     text-align:center;
     z-index:10;
     animation:popIn 1.2s ease;
@@ -41,7 +41,7 @@
   h1{
     font-family:Orbitron,sans-serif;
     font-size:3rem;
-    background:linear-gradient(90deg,#ff00cc,#3333ff,#00ffcc,#ffdd00);
+    background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
     background-size:400% 400%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -60,7 +60,7 @@
   p{
     font-size:1.3rem;
     margin:20px 0 40px;
-    background:linear-gradient(90deg,#ff6a00,#ff00cc,#3333ff,#00ffcc);
+    background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     font-weight:600;
@@ -75,27 +75,28 @@
     font-size:17px;
     border:none;
     border-radius:15px;
-    background:linear-gradient(90deg,#ff00cc,#3333ff,#00ffcc);
+    background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc);
     color:#fff;
     cursor:pointer;
     font-weight:700;
-    box-shadow:0 0 20px rgba(255,0,204,0.6),0 0 40px rgba(51,51,255,0.4);
+    box-shadow:0 0 20px rgba(0,255,204,0.6),0 0 40px rgba(51,51,255,0.4);
     transition:all 0.3s ease;
   }
   .home-btn:hover{
     transform:scale(1.1);
-    box-shadow:0 0 30px rgba(255,0,204,0.8),0 0 60px rgba(51,51,255,0.6);
+    box-shadow:0 0 30px rgba(0,255,204,0.8),0 0 60px rgba(51,51,255,0.6);
   }
 </style>
 </head>
 <body>
-  <div class="success-box">
-    <h1 id="successMsg">Account Created Successfully!</h1>
-    <p id="welcomeMsg">Welcome, <span id="userName"></span>! Your account is ready. Please login to continue.</p>
-    <button class="home-btn" onclick="goHome()">Go to Login</button>
+  <div class="login-success-box">
+    <h1 id="successMsg">Login Successful!</h1>
+    <p id="welcomeMsg">Welcome, <span id="userName"></span>! You have successfully logged in.</p>
+    <button class="home-btn" onclick="goHome()">Go to Home</button>
   </div>
+
 <script>
-  // Generate confetti particles
+  // Create confetti particles
   for(let i=0;i<80;i++){
     let conf=document.createElement('div');
     conf.className='confetti';
@@ -105,18 +106,23 @@
     document.body.appendChild(conf);
   }
 
+  // Display current user's name dynamically
   window.onload = function(){
     const currentUser = localStorage.getItem('currentUser');
     if(currentUser){
       const users = JSON.parse(localStorage.getItem('users') || '{}');
-      const name = users[currentUser] ? users[currentUser].name : '';
-      document.getElementById('successMsg').textContent = `Your account created, ${name}!`;
+      const name = users[currentUser] ? users[currentUser].name : 'User';
+      document.getElementById('successMsg').textContent = `Login Successful, ${name}!`;
       document.getElementById('userName').textContent = name;
+    } else {
+      // If no user found, redirect to signup/login
+      window.location.href='signup.html';
     }
   };
 
   function goHome(){
-    window.location.href='login.html';
+    // Redirect to Home page (can also be main site)
+    window.location.href='loginpage.html';
   }
 </script>
 </body>

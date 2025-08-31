@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DWC | Sign Up</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
-    body{min-height:100vh;display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(-45deg,#ff6a00,#ff0058,#6a11cb,#2575fc);
-      background-size:400% 400%;
-      animation:gradientMove 12s ease infinite;overflow:hidden;}
-    @keyframes gradientMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-    .bubble{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);bottom:-60px;animation:rise 10s linear infinite;}
-    @keyframes rise{0%{transform:translateY(0) scale(0.5);}100%{transform:translateY(-110vh) scale(1);}}
-    .auth-box{backdrop-filter:blur(12px);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:45px 35px;width:100%;max-width:450px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center;animation:popIn 1.2s ease;}
-    @keyframes popIn{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);}}
-    .auth-box h2{font-family:Orbitron,sans-serif;font-size:28px;margin-bottom:25px;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.7);}
-    .input-group{position:relative;margin:20px 0;}
-    .input-group i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#ddd;font-size:18px;transition:.3s;}
-    .input-group input{width:100%;padding:14px 44px;border-radius:12px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:15px;outline:none;transition:.3s;}
-    .input-group input:focus{border-color:#ff7cfb;box-shadow:0 0 12px #ff7cfb66;}
-    .input-group input:focus ~ i{color:#ff7cfb;transform:translateY(-50%) scale(1.2);}
-    .eye-toggle{position:absolute;top:50%;right:12px;transform:translateY(-50%);color:#ddd;cursor:pointer;}
-    .auth-btn{width:100%;padding:14px;margin-top:15px;font-size:16px;border:none;border-radius:12px;background:linear-gradient(90deg,#ff00cc,#3333ff);color:#fff;font-weight:600;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s;}
-    .auth-btn::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);transition:all .6s;}
-    .auth-btn:hover::after{left:100%;}
-    .auth-btn:hover{transform:scale(1.05);}
-    .links{margin-top:20px;font-size:14px;color:#eee;}
-    .links a{color:#00eaff;text-decoration:none;font-weight:600;}
-    .links a:hover{text-decoration:underline;}
-    .error-msg{color:#ff8080;font-size:14px;margin-top:5px;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DWC | Sign Up</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  /* --- Same bubble background, auth-box styles as before --- */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(-45deg,#ff6a00,#ff0058,#6a11cb,#2575fc);
+    background-size:400% 400%;
+    animation:gradientMove 12s ease infinite;overflow:hidden;}
+  @keyframes gradientMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  .bubble{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);bottom:-60px;animation:rise 10s linear infinite;}
+  @keyframes rise{0%{transform:translateY(0) scale(0.5);}100%{transform:translateY(-110vh) scale(1);}}
+  .auth-box{backdrop-filter:blur(12px);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:45px 35px;width:100%;max-width:450px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center;animation:popIn 1.2s ease;}
+  @keyframes popIn{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);}}
+  .auth-box h2{font-family:Orbitron,sans-serif;font-size:28px;margin-bottom:25px;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.7);}
+  .input-group{position:relative;margin:20px 0;}
+  .input-group i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#ddd;font-size:18px;transition:.3s;}
+  .input-group input{width:100%;padding:14px 44px;border-radius:12px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:15px;outline:none;transition:.3s;}
+  .input-group input:focus{border-color:#ff7cfb;box-shadow:0 0 12px #ff7cfb66;}
+  .input-group input:focus ~ i{color:#ff7cfb;transform:translateY(-50%) scale(1.2);}
+  .eye-toggle{position:absolute;top:50%;right:12px;transform:translateY(-50%);color:#ddd;cursor:pointer;}
+  .auth-btn{width:100%;padding:14px;margin-top:15px;font-size:16px;border:none;border-radius:12px;background:linear-gradient(90deg,#ff00cc,#3333ff);color:#fff;font-weight:600;cursor:pointer;position:relative;overflow:hidden;transition:transform .3s;}
+  .auth-btn::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);transition:all .6s;}
+  .auth-btn:hover::after{left:100%;}
+  .auth-btn:hover{transform:scale(1.05);}
+  .links{margin-top:20px;font-size:14px;color:#eee;}
+  .links a{color:#00eaff;text-decoration:none;font-weight:600;}
+  .links a:hover{text-decoration:underline;}
+  .error-msg{color:#ff8080;font-size:14px;margin-top:5px;}
+</style>
 </head>
 <body>
   <div class="bubble" style="left:10%;animation-duration:12s;"></div>
@@ -92,10 +93,12 @@ signupForm.addEventListener('submit',function(e){
   const users=JSON.parse(localStorage.getItem('users')||'{}');
   if(users[email]){errorDiv.textContent='Email already registered!'; return;}
 
+  // Save user and currentUser
   users[email]={name:name,password:pass};
   localStorage.setItem('users',JSON.stringify(users));
   localStorage.setItem('currentUser',email);
 
+  // Redirect to login success page
   window.location.href='signupsucess.html';
 });
 </script>
