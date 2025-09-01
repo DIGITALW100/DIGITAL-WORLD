@@ -11,7 +11,129 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
+ <style>
+ /* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,30,0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Popup Box */
+.popup-box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 380px;
+  width: 90%;
+  position: relative;
+  overflow: hidden;
+
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #00aaff, #7d3cff) 1;
+
+  box-shadow: 0 0 25px rgba(0,170,255,0.7),
+              0 0 40px rgba(125,60,255,0.6);
+  animation: popIn 0.5s ease;
+}
+
+/* Animated Gradient Border Effect */
+.popup-box::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 25px;
+  padding: 2px;
+  background: linear-gradient(135deg, #00aaff, #7d3cff, #ffffff, #00aaff);
+  background-size: 400% 400%;
+  animation: gradientMove 6s ease infinite;
+  z-index: -1;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+}
+
+/* Heading */
+.popup-box h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(125,60,255,0.9),
+               0 0 15px rgba(0,170,255,0.9);
+  letter-spacing: 1px;
+}
+
+/* Buttons */
+.popup-box .btns {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.popup-box a {
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #00aaff, #7d3cff);
+  box-shadow: 0 0 15px rgba(0,170,255,0.6),
+              0 0 25px rgba(125,60,255,0.6);
+  transition: 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-box a::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255,255,255,0.2);
+  transform: rotate(45deg);
+  transition: 0.5s;
+}
+
+.popup-box a:hover::before {
+  left: 100%;
+}
+
+.popup-box a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00aaff,
+              0 0 35px #7d3cff,
+              0 0 45px #ffffff;
+}
+
+/* Animations */
+@keyframes popIn {
+  from {transform: scale(0.7) translateY(40px); opacity: 0;}
+  to   {transform: scale(1) translateY(0); opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to   {opacity: 1;}
+}
+
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+</style>
+	<style>
     /* --- Disable selection and dragging site-wide --- */
     html, body, * {
       -webkit-user-select: none !important;
@@ -221,7 +343,50 @@
     <img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo">
   </div>
 </nav>
+<!-- Popup Box -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <h2>⚠ First Sign Up or Login</h2>
+    <div class="btns">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </div>
+</div>
 
+
+<script>
+ // Default: user not logged in
+let isLoggedIn = false;
+
+const popup = document.getElementById("popup");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+// Check all navbar links
+navLinks.forEach(link => {
+  // Skip login & signup links
+  if (link.getAttribute("href").includes("login") || link.getAttribute("href").includes("signup")) return;
+
+  // For others, block if not logged in
+  link.addEventListener("click", function(e) {
+    if(!isLoggedIn){
+      e.preventDefault();
+      popup.style.display = "flex";
+    }
+  });
+});
+
+// ESC key closes popup
+window.addEventListener("keydown", e=>{
+  if(e.key === "Escape") popup.style.display = "none";
+});
+
+// Click outside closes popup
+popup.addEventListener("click", e=>{
+  if(e.target === popup) popup.style.display = "none";
+});
+
+</script>
 <!-- Hero Section -->
 <header id="home" class="hero">
   <h1 class="brand">Digital World Cyber Café</h1>
@@ -234,6 +399,7 @@
 </script>
 </body>
 </html>
+
 
 
 
