@@ -22,25 +22,27 @@
   align-items: center;
   z-index: 2000;
   animation: fadeIn 0.6s ease-in-out;
+  font-family: Algerian;
 }
 
 /* Popup Box */
 .popup-box {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
   padding: 30px;
-  border-radius: 25px;
+  border-radius: 28px;
   text-align: center;
   max-width: 380px;
   width: 90%;
   position: relative;
   overflow: hidden;
 
-  border: 2px solid transparent;
+  border: 3px solid transparent;
   border-image: linear-gradient(135deg, #00aaff, #7d3cff) 1;
 
-  box-shadow: 0 0 25px rgba(0,170,255,0.7),
-              0 0 40px rgba(125,60,255,0.6);
+  box-shadow: 0 0 20px #00aaff,
+              0 0 35px #7d3cff,
+              0 0 50px #00aaff;
   animation: popIn 0.5s ease;
 }
 
@@ -48,9 +50,9 @@
 .popup-box::before {
   content: "";
   position: absolute;
-  inset: -2px;
-  border-radius: 25px;
-  padding: 2px;
+  inset: -3px;
+  border-radius: 28px;
+  padding: 3px;
   background: linear-gradient(135deg, #00aaff, #7d3cff, #ffffff, #00aaff);
   background-size: 400% 400%;
   animation: gradientMove 6s ease infinite;
@@ -62,13 +64,11 @@
 
 /* Heading */
 .popup-box h2 {
-  font-size: 22px;
+  font-size: 26px;
   margin-bottom: 20px;
-  color: #fff;
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(125,60,255,0.9),
-               0 0 15px rgba(0,170,255,0.9);
-  letter-spacing: 1px;
+  color: #ffffff;
+  font-weight: 900;
+  letter-spacing: 1.5px;
 }
 
 /* Buttons */
@@ -79,41 +79,25 @@
 }
 
 .popup-box a {
-  padding: 12px 28px;
+  padding: 12px 32px;
   border-radius: 40px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: none;
   color: #fff;
   background: linear-gradient(135deg, #00aaff, #7d3cff);
-  box-shadow: 0 0 15px rgba(0,170,255,0.6),
-              0 0 25px rgba(125,60,255,0.6);
   transition: 0.3s ease-in-out;
   position: relative;
   overflow: hidden;
-}
-
-.popup-box a::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255,255,255,0.2);
-  transform: rotate(45deg);
-  transition: 0.5s;
-}
-
-.popup-box a:hover::before {
-  left: 100%;
+  border: 2px solid #ffffff22;
 }
 
 .popup-box a:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px #00aaff,
-              0 0 35px #7d3cff,
-              0 0 45px #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 20px #00aaff,
+              0 0 30px #7d3cff,
+              0 0 40px #ffffff;
 }
 
 /* Animations */
@@ -132,6 +116,7 @@
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
+
 </style>
 	<style>
     /* --- Disable selection and dragging site-wide --- */
@@ -320,20 +305,20 @@
 
   <!-- Nav Links -->
   <div class="nav-links">
-    <a href="index.html"><i class="fa fa-house"></i>Home</a>
-    <a href="#services"><i class="fa fa-screwdriver-wrench"></i>Services</a>
-    <a href="#about"><i class="fa fa-circle-info"></i>About</a>
-    <a href="#contact"><i class="fa fa-envelope"></i>Contact</a>
-    <a href="#gaming"><i class="fa fa-gamepad"></i>Gaming</a>
-    <a href="#printing"><i class="fa fa-print"></i>Printing</a>
-    <a href="#payments.html"><i class="fa fa-qrcode"></i>Payments</a>
-    <a href="#tickets"><i class="fa fa-ticket"></i>Tickets</a>
-    <a href="#photos"><i class="fa fa-id-card"></i>Photos</a>
-    <a href="#support"><i class="fa fa-headset"></i>Support</a>
-    <a href="#gallery"><i class="fa fa-image"></i>Gallery</a>
-    <a href="#book"><i class="fa fa-bolt"></i>Book</a>
-	<a href="#softwares"><i class="fa fa-code"></i> Cyber and Other Softwares</a>
-	  <a href="#privacy-policy"><i class="fa fa-shield-alt"></i> Privacy & Policy</a>
+    <a href="home.html"><i class="fa fa-house"></i>Home</a>
+    <a href="services.html"><i class="fa fa-screwdriver-wrench"></i>Services</a>
+    <a href="about.html"><i class="fa fa-circle-info"></i>About</a>
+    <a href="contact.html"><i class="fa fa-envelope"></i>Contact</a>
+    <a href="gaming.html"><i class="fa fa-gamepad"></i>Gaming</a>
+    <a href="printing.html"><i class="fa fa-print"></i>Printing</a>
+    <a href="payments.html"><i class="fa fa-qrcode"></i>Payments</a>
+    <a href="tickets.html"><i class="fa fa-ticket"></i>Tickets</a>
+    <a href="photos.html"><i class="fa fa-id-card"></i>Photos</a>
+    <a href="support.html"><i class="fa fa-headset"></i>Support</a>
+    <a href="gallery.html"><i class="fa fa-image"></i>Gallery</a>
+    <a href="book.html"><i class="fa fa-bolt"></i>Book</a>
+	<a href="softwares.html"><i class="fa fa-code"></i> Cyber and Other Softwares</a>
+	  <a href="privacy-policy.html"><i class="fa fa-shield-alt"></i> Privacy & Policy</a>
     <a href="login.html" style="color: blue;"><i class="fas fa-sign-in-alt"></i> Login</a>
     <a href="signup.html" style="color: blue;"><i class="fas fa-user-plus"></i> Sign Up</a>
   </div>
@@ -346,7 +331,7 @@
 <!-- Popup Box -->
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-    <h2>⚠ First Sign Up or Login And Get Any Informetion This Website Click On Explore fetures</h2>
+<h2>⚠ First Sign Up or Login And Get Any Informetion This Website Click On Explore fetures</h2>
     <div class="btns">
       <a href="login.html">Login</a>
       <a href="signup.html">Sign Up</a>
@@ -391,7 +376,7 @@ popup.addEventListener("click", e=>{
 <header id="home" class="hero">
   <h1 class="brand">Digital World Cyber Café</h1>
   <p class="tag"></p>
-  <a href="#exploreservices" class="hero-btn"><i class="fa fa-arrow-right"></i> Explore Services</a>
+  <a href="exploreservices.html" class="hero-btn"><i class="fa fa-arrow-right"></i> Explore Services</a>
 </header>
 
 <script>
