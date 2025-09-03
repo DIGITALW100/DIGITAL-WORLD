@@ -8,6 +8,108 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* Popup Overlay */
+.logout-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,30,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+}
+
+/* Popup Box */
+.logout-box {
+  background: linear-gradient(135deg, #1a0033, #0d1b3d);
+  padding: 35px 30px;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  width: 380px;
+  box-shadow: 0 0 25px rgba(125,60,255,0.8), 0 0 45px rgba(0,170,255,0.8);
+  border: 2px solid rgba(255,255,255,0.15);
+  animation: popIn 0.5s ease;
+}
+@keyframes popIn {
+  from {transform: scale(0.7); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+
+.logout-box h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #00aaff, #7d3cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(125,60,255,0.6);
+}
+
+.logout-box input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0 25px;
+  border-radius: 12px;
+  border: 2px solid #7d3cff;
+  outline: none;
+  font-size: 16px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  text-align: center;
+  transition: 0.3s;
+}
+.logout-box input:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 12px #00aaff, 0 0 18px #7d3cff;
+}
+
+/* Buttons Container */
+.logout-box .btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Buttons */
+.logout-box button {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+  letter-spacing: 1px;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, #00aaff, #7d3cff);
+  color: #fff;
+  box-shadow: 0 0 18px #00aaff, 0 0 30px #7d3cff;
+}
+.btn-yes:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px #7d3cff, 0 0 40px #00aaff;
+}
+
+.btn-no {
+  background: linear-gradient(135deg, #333, #222);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+.btn-no:hover {
+  background: linear-gradient(135deg, #555, #333);
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255,255,255,0.4);
+}
+
+</style>
+
 <style>
   /* --- Disable selection & dragging --- */
   html, body, * {
@@ -160,15 +262,19 @@
     <a href="contact.html"><i class="fa fa-envelope"></i>Contact</a>
     <a href="gaming.html"><i class="fa fa-gamepad"></i>Gaming</a>
     <a href="printing.html"><i class="fa fa-print"></i>Printing</a>
-    <a href="payments.html"><i class="fa fa-qrcode"></i>Payments</a>
+    <a href="#payments.html"><i class="fa fa-qrcode"></i>Payments</a>
     <a href="tickets.html"><i class="fa fa-ticket"></i>Tickets</a>
     <a href="photos.html"><i class="fa fa-id-card"></i>Photos</a>
     <a href="support.html"><i class="fa fa-headset"></i>Support</a>
     <a href="gallery.html"><i class="fa fa-image"></i>Gallery</a>
     <a href="book.html"><i class="fa fa-bolt"></i>Book</a>
+<a href="#book.html"><i class="fa fa-lock"></i>Extension and other software security key  updates</a>
 	<a href="softwares.html"><i class="fa fa-code"></i> Cyber and Other Softwares</a>
+	<a href="profile.html"><i class="fa fa-user"></i>Profile</a>
 	<a href="privacy-policy.html"><i class="fa fa-shield-alt"></i> Privacy & Policy</a>
-    <a href="index.html" onclick="logout()"><i class="fas fa-arrow-right-from-bracket"></i> Logout</a>
+   <a href="javascript:void(0)" onclick="openLogoutPopup()" style="color:red;font-weight:bold">
+  <i class="fas fa-arrow-right-from-bracket"></i> Logout
+</a>
   </div>
 
 <div class="logo-circle">
@@ -182,7 +288,47 @@
   <div class="welcome-box">Welcome, <span id="userName"></span>!</div>
   <br>
   </header>
+<div class="logout-overlay" id="logoutPopup">
+  <div class="logout-box">
+    <h2>Are you sure you want to logout?</h2>
+    <input type="password" id="logoutPassword" placeholder="Enter your password">
+    <div class="btns">
+      <button class="btn-yes" onclick="confirmLogout()">Yes</button>
+      <button class="btn-no" onclick="closeLogoutPopup()">No</button>
+    </div>
+  </div>
+</div>
+<script>
+// Open popup
+function openLogoutPopup(){
+  document.getElementById("logoutPopup").style.display="flex";
+}
 
+// Close popup
+function closeLogoutPopup(){
+  document.getElementById("logoutPopup").style.display="none";
+}
+
+// Confirm Logout
+function confirmLogout(){
+  const inputPass = document.getElementById("logoutPassword").value;
+  const currentUser = localStorage.getItem("currentUser");
+  if(currentUser){
+    const users = JSON.parse(localStorage.getItem("users") || "{}");
+    const realPass = users[currentUser] ? users[currentUser].password : "";
+    if(inputPass === realPass){
+      // Clear session
+      localStorage.removeItem("currentUser");
+      alert("✅ Logged out successfully!");
+      window.location.href="index.html";
+    } else {
+      alert("❌ Wrong password! Logout failed.");
+    }
+  } else {
+    alert("No active session found.");
+  }
+}
+</script>
 <script>
 window.onload = function(){
   const currentUser = localStorage.getItem('currentUser');

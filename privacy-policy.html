@@ -1,1 +1,288 @@
-privacy-policy.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy & Policy - Digital World Cyber Café</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+  :root { --blue: #00aaff; --purple: #7d3cff; --white: #ffffff; }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body, html{
+    font-family:Poppins,sans-serif;
+    background:linear-gradient(135deg,#ffffff,#e6f0ff,#f5f0ff);
+    background-size:400% 400%;
+    animation:gradient 15s ease infinite;
+    color:#fff;
+    overflow-x:hidden;
+  }
+  @keyframes gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  /* Navbar */
+  nav.nav{
+    font-family:Algerian, Poppins, sans-serif;
+    position:sticky;top:0;width:100%;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 25px;z-index:1000;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(14px);
+    border:2px solid var(--purple);
+    border-radius:14px;
+    box-shadow:0 0 20px var(--purple),0 0 40px rgba(125,60,255,0.6);
+    animation:glowBorder 3s infinite alternate;
+  }
+  @keyframes glowBorder{
+    from {box-shadow:0 0 15px var(--purple),0 0 30px rgba(125,60,255,0.6);}
+    to {box-shadow:0 0 25px var(--blue),0 0 45px rgba(0,170,255,0.8);}
+  }
+
+  .logo-circle{
+    width:80px;height:80px;border-radius:50%;overflow:hidden;
+    animation:spin 12s linear infinite;
+    box-shadow:0 0 25px var(--blue),0 0 40px var(--purple);
+    flex-shrink:0;transition:all .3s ease;
+  }
+  .logo-circle:hover{
+    transform:scale(1.15);
+    box-shadow:0 0 35px var(--blue),0 0 60px var(--purple);
+  }
+  .logo-circle img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+  .nav-links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;}
+  .nav-links a{
+    margin:6px 10px;padding:12px 20px;border-radius:40px;
+    text-decoration:none;font-weight:600;color:purple;
+    position:relative;background:rgba(255,255,255,0.15);
+    border:1px solid rgba(125,60,255,0.4);
+    box-shadow:0 4px 20px rgba(0,0,0,0.08);
+    transition:all .4s ease;display:flex;align-items:center;gap:8px;
+    overflow:hidden;
+  }
+  .nav-links a::before{
+    content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
+    transition:.5s;
+  }
+  .nav-links a:hover::before{left:100%;}
+  .nav-links a:hover{
+    color:var(--blue);background:rgba(255,255,255,0.35);
+    box-shadow:0 0 15px var(--purple),0 0 30px rgba(0,170,255,.6);
+    transform:scale(1.12);
+  }
+
+  /* Hero */
+  header.hero{text-align:center;padding:140px 20px 80px}
+  header.hero h1{
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(40px,6vw,75px);
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:glow 3s infinite alternate;
+  }
+  @keyframes glow{
+    from{text-shadow:0 0 8px var(--blue)}
+    to{text-shadow:0 0 20px var(--purple)}
+  }
+
+  /* Content Box */
+  .main-content{
+    max-width:1000px;margin:30px auto;padding:30px;
+    background:rgba(0,0,0,0.6);
+    border-radius:25px;
+    box-shadow:0 0 35px var(--purple),0 0 50px var(--blue);
+  }
+  .main-content h2{
+    color:var(--blue);margin-top:25px;
+    border-bottom:2px solid var(--purple);padding-bottom:5px;
+  }
+  .main-content p, .main-content li{
+    margin:12px 0;line-height:1.8;color:#fff;font-size:16px;
+  }
+  .main-content ul{margin-left:25px;}
+
+  /* Footer */
+  footer{
+    text-align:center;padding:25px;color:#fff;
+    background:rgba(0,0,0,0.4);
+    margin-top:40px;border-top:2px solid var(--purple);
+    box-shadow:0 0 15px var(--blue),0 0 20px var(--purple);
+  }
+  footer a{color:var(--blue);text-decoration:none;}
+
+  /* Popup Overlay */
+  .popup-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none; justify-content: center; align-items: center;
+    z-index: 2000;
+  }
+  .popup-box {
+    background:rgba(0,0,0,0.9);
+    padding:30px;border-radius:20px;text-align:center;
+    color:#fff;max-width:380px;margin:auto;
+    box-shadow:0 0 20px var(--blue),0 0 30px var(--purple);
+  }
+  .popup-box h2{font-size:22px;margin-bottom:20px;color:#ff5555;}
+  .popup-box a{
+    padding:10px 25px;border-radius:30px;
+    text-decoration:none;font-weight:600;
+    color:#fff;display:inline-block;
+  }
+  .btn-login{background:linear-gradient(135deg,#00aaff,#7d3cff);}
+  .btn-signup{background:linear-gradient(135deg,#7d3cff,#00aaff);}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="nav">
+  <div class="logo-circle"><img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo"></div>
+  <div class="nav-links">
+    <a href="home.html"><i class="fa fa-house"></i>Home</a>
+    <a href="services.html"><i class="fa fa-screwdriver-wrench"></i>Services</a>
+    <a href="about.html"><i class="fa fa-circle-info"></i>About</a>
+    <a href="profile.html"><i class="fa fa-user"></i>Profile</a>
+
+    <a href="privacy-policy.html"><i class="fa fa-shield-alt"></i>Privacy & Policy</a>
+    <a href="terms.html"><i class="fa fa-file-contract"></i>Terms & Conditions</a>
+    <a href="refund.html"><i class="fa fa-rotate-left"></i>Refund Policy</a>
+    <a href="shipping.html"><i class="fa fa-truck"></i>Shipping Policy</a>
+    <a href="contact.html"><i class="fa fa-envelope"></i>Contact Us</a>
+  </div>
+  <div class="logo-circle"><img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo"></div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+  <h1>Privacy & Policy</h1>
+  <p style="color: #ccc; font-size: 18px; margin-top: 10px;">Your data privacy is our top priority. We provide professional cyber café services with transparency.</p>
+</header>
+
+<!-- Main Content -->
+<div class="main-content">
+  <p>At <strong>Digital World Cyber Café</strong>, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our free and paid services such as browsing, gaming, printing, ticketing, and more.</p>
+
+  <h2>Information We Collect</h2>
+  <ul>
+    <li>Account information: name, email, password</li>
+    <li>Payment details for services purchased</li>
+    <li>Session and usage data (time, duration, activity logs)</li>
+    <li>User content: uploaded files, bookings, photos</li>
+    <li>Cookies & local storage for personalization</li>
+  </ul>
+
+  <h2>How We Use Your Information</h2>
+  <ul>
+    <li>Deliver, maintain, and improve our services</li>
+    <li>Process secure payments</li>
+    <li>Provide software updates and technical support</li>
+    <li>Analyze usage to enhance performance and security</li>
+    <li>Prevent fraud, unauthorized access, and misuse</li>
+  </ul>
+
+  <h2>Sharing & Third-Party Services</h2>
+  <ul>
+    <li>Trusted partners for payments, analytics, and communication</li>
+    <li>No selling of personal data to third parties</li>
+    <li>Information may be shared only if required by law or government authorities</li>
+  </ul>
+
+  <h2>User Rights</h2>
+  <ul>
+    <li>Access, update, or correct personal information</li>
+    <li>Request deletion of data where legally applicable</li>
+    <li>Opt-out of marketing emails and notifications</li>
+    <li>Request a copy of your data (data portability)</li>
+  </ul>
+
+  <h2>Data Retention</h2>
+  <p>We retain your personal information only for as long as necessary to provide services, comply with legal obligations, resolve disputes, and enforce agreements.</p>
+
+  <h2>Security Measures</h2>
+  <p>Your data is protected using encryption, secure sessions, and periodic audits. Sensitive information such as payments are processed through secure channels.</p>
+
+  <h2>Children's Privacy</h2>
+  <p>Our services are intended for individuals aged 13 and above. We do not knowingly collect personal information from children under this age.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time to reflect new practices or legal requirements. Updates will be posted on this page with a revised "Last Updated" date.</p>
+
+  <h2>Contact Us</h2>
+  <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us:</p>
+  <p>Email: <a href="mailto:digitalworldcybercafeservices100@gmail.com">digitalworldcybercafeservices100@gmail.com</a></p>
+</div>
+
+<!-- Popup -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <h2>⚠ Please Login or Sign Up to Continue</h2>
+    <div style="display:flex; justify-content:center; gap:15px;">
+      <a href="login.html" class="btn-login">Login</a>
+      <a href="signup.html" class="btn-signup">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<script>
+let isLoggedIn = false; // Default: user not logged in
+
+const popup = document.getElementById("popup");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+navLinks.forEach(link => {
+  let href = link.getAttribute("href");
+
+  // Allow public pages
+  if (
+    href.includes("login") || 
+    href.includes("signup") || 
+    href.includes("privacy-policy") || 
+    href.includes("terms") || 
+    href.includes("refund") || 
+    href.includes("shipping") || 
+    href.includes("contact")
+  ) {
+    return; 
+  }
+
+  // Block other pages if not logged in
+  link.addEventListener("click", function(e) {
+    if(!isLoggedIn){
+      e.preventDefault();
+      popup.style.display = "flex";
+    }
+  });
+});
+
+// ESC key closes popup
+window.addEventListener("keydown", e=>{
+  if(e.key === "Escape") popup.style.display = "none";
+});
+
+// Click outside closes popup
+popup.addEventListener("click", e=>{
+  if(e.target === popup) popup.style.display = "none";
+});
+</script>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 Digital World Cyber Café | 
+  <a href="mailto:digitalworldcybercafeservices100@gmail.com">Contact Us</a>
+</footer>
+
+</body>
+</html>

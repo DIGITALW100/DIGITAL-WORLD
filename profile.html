@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DWC | User Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+    body{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(-45deg,#ff6a00,#ff0058,#6a11cb,#2575fc);
+      background-size:400% 400%;
+      animation:gradientMove 12s ease infinite;overflow:hidden;
+    }
+    @keyframes gradientMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+    .bubble{position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);bottom:-60px;animation:rise 10s linear infinite;}
+    @keyframes rise{0%{transform:translateY(0) scale(0.5);}100%{transform:translateY(-110vh) scale(1);}}
+
+    .profile-box{
+      backdrop-filter:blur(12px);
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.3);
+      border-radius:25px;
+      padding:50px 40px;
+      width:100%;max-width:550px;
+      box-shadow:0 10px 40px rgba(0,0,0,.3);
+      text-align:center;
+      animation:popIn 1.2s ease;
+      color:#fff;
+    }
+    @keyframes popIn{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);}}
+    .profile-box h2{
+      font-family:Orbitron,sans-serif;
+      font-size:28px;margin-bottom:20px;
+      text-shadow:0 0 8px rgba(255,255,255,.7);
+    }
+    .profile-pic{
+      width:140px;height:140px;
+      border-radius:50%;
+      border:4px solid #fff;
+      margin:0 auto 20px;
+      object-fit:cover;
+      box-shadow:0 0 15px #fff,0 0 30px #00eaff;
+      transition:0.3s;
+    }
+    .profile-pic:hover{transform:scale(1.05);}
+    .details{
+      text-align:left;
+      margin:20px 0;
+      font-size:16px;
+    }
+    .details p{
+      margin:12px 0;
+      font-weight:500;
+    }
+    .details i{margin-right:10px;color:#00eaff;}
+    .btn{
+      display:inline-block;
+      margin:12px 8px;
+      padding:12px 22px;
+      border:none;
+      border-radius:12px;
+      background:linear-gradient(90deg,#ff00cc,#3333ff);
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition:transform .3s;
+    }
+    .btn::after{
+      content:"";position:absolute;top:0;left:-100%;
+      width:100%;height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);
+      transition:all .6s;
+    }
+    .btn:hover::after{left:100%;}
+    .btn:hover{transform:scale(1.05);}
+    input[type="file"]{display:none;}
+  </style>
+</head>
+<body>
+  <!-- floating bubbles -->
+  <div class="bubble" style="left:15%;animation-duration:12s;"></div>
+  <div class="bubble" style="left:35%;animation-duration:18s;width:20px;height:20px;"></div>
+  <div class="bubble" style="left:65%;animation-duration:14s;width:25px;height:25px;"></div>
+  <div class="bubble" style="left:85%;animation-duration:20s;"></div>
+  <div class="bubble" style="left:95%;animation-duration:22s;width:15px;height:15px;"></div>
+
+  <div class="profile-box">
+    <h2><i class="fas fa-id-badge"></i> User Profile</h2>
+    <label for="uploadPic">
+      <img src="https://via.placeholder.com/140" id="profileImage" class="profile-pic" alt="Profile">
+    </label>
+    <input type="file" id="uploadPic" accept="image/*">
+
+    <div class="details">
+      <p><i class="fas fa-user"></i> <span id="userName">John Doe</span></p>
+      <p><i class="fas fa-envelope"></i> <span id="userEmail">johndoe@example.com</span></p>
+    </div>
+
+    <button class="btn" onclick="editProfile()"><i class="fas fa-edit"></i> Edit Profile</button>
+    <button class="btn" onclick="downloadPDF()"><i class="fas fa-download"></i> Download PDF</button>
+    <button class="btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+
+<script>
+  // Load user details
+  window.onload=function(){
+    const currentUser=localStorage.getItem('currentUser');
+    if(!currentUser){window.location.href='login.html';return;}
+    const users=JSON.parse(localStorage.getItem('users')||'{}');
+    const user=users[currentUser];
+    if(user){
+      document.getElementById('userName').textContent=user.name;
+      document.getElementById('userEmail').textContent=currentUser;
+    }
+    // load profile image
+    const img=localStorage.getItem(currentUser+"_img");
+    if(img){document.getElementById('profileImage').src=img;}
+  }
+
+  // Upload profile image
+  document.getElementById('uploadPic').addEventListener('change',function(e){
+    const file=e.target.files[0];
+    if(file && file.size < 600*1024*1024){ // 600 MB limit
+      const reader=new FileReader();
+      reader.onload=function(){
+        document.getElementById('profileImage').src=reader.result;
+        const currentUser=localStorage.getItem('currentUser');
+        localStorage.setItem(currentUser+"_img",reader.result);
+      }
+      reader.readAsDataURL(file);
+    }else{
+      alert("Image must be less than 600 MB!");
+    }
+  });
+
+  function editProfile(){
+    const newName=prompt("Enter new name:");
+    if(newName){
+      const currentUser=localStorage.getItem('currentUser');
+      const users=JSON.parse(localStorage.getItem('users')||'{}');
+      users[currentUser].name=newName;
+      localStorage.setItem('users',JSON.stringify(users));
+      document.getElementById('userName').textContent=newName;
+    }
+  }
+
+  async function downloadPDF(){
+    const { jsPDF }=window.jspdf;
+    const doc=new jsPDF();
+    doc.setFontSize(18);
+    doc.text("User Profile",70,20);
+    doc.setFontSize(12);
+    doc.text("Name: "+document.getElementById('userName').textContent,20,40);
+    doc.text("Email: "+document.getElementById('userEmail').textContent,20,55);
+    doc.save("profile.pdf");
+  }
+
+  function logout(){
+    localStorage.removeItem('currentUser');
+    window.location.href="login.html";
+  }
+</script>
+</body>
+</html>

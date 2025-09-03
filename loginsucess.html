@@ -59,7 +59,7 @@
   }
   p{
     font-size:1.3rem;
-    margin:20px 0 40px;
+    margin:20px 0 20px;
     background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -70,21 +70,11 @@
     0%{opacity:0; transform:translateY(20px);}
     100%{opacity:1; transform:translateY(0);}
   }
-  .home-btn{
-    padding:14px 35px;
-    font-size:17px;
-    border:none;
-    border-radius:15px;
-    background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc);
-    color:#fff;
-    cursor:pointer;
-    font-weight:700;
-    box-shadow:0 0 20px rgba(0,255,204,0.6),0 0 40px rgba(51,51,255,0.4);
-    transition:all 0.3s ease;
-  }
-  .home-btn:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 30px rgba(0,255,204,0.8),0 0 60px rgba(51,51,255,0.6);
+  .redirect-msg{
+    font-size:1rem;
+    color:#444;
+    margin-top:10px;
+    font-weight:500;
   }
 </style>
 </head>
@@ -92,7 +82,7 @@
   <div class="login-success-box">
     <h1 id="successMsg">Login Successful!</h1>
     <p id="welcomeMsg">Welcome, <span id="userName"></span>! You have successfully logged in.</p>
-    <button class="home-btn" onclick="goHome()">Go to Home</button>
+    <p class="redirect-msg" id="redirectMsg">Please wait... Redirecting to Home in 30 seconds.</p>
   </div>
 
 <script>
@@ -118,12 +108,19 @@
       // If no user found, redirect to signup/login
       window.location.href='signup.html';
     }
-  };
 
-  function goHome(){
-    // Redirect to Home page (can also be main site)
-    window.location.href='loginpage.html';
-  }
+    // Countdown + redirect (30 seconds)
+    let counter = 30;
+    const redirectMsg = document.getElementById('redirectMsg');
+    const interval = setInterval(()=>{
+      counter--;
+      redirectMsg.textContent = `Please wait... Redirecting to Home in ${counter} seconds.`;
+      if(counter <= 0){
+        clearInterval(interval);
+        window.location.href='loginpage.html'; // Home page
+      }
+    },1000);
+  };
 </script>
 </body>
 </html>

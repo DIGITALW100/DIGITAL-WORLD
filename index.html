@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -331,13 +332,17 @@
 <!-- Popup Box -->
 <div class="popup-overlay" id="popup">
   <div class="popup-box">
-<h2>⚠ First Sign Up or Login And Get Any Informetion This Website Click On Explore fetures</h2>
+    <h2>
+      <span style="color:red; font-size: 28px; margin-right: 8px;">⚠</span>
+      First Sign Up or Login And Get Any Information From This Website. Click On Explore Features
+    </h2>
     <div class="btns">
       <a href="login.html">Login</a>
       <a href="signup.html">Sign Up</a>
     </div>
   </div>
 </div>
+
 
 
 <script>
@@ -349,8 +354,12 @@ const navLinks = document.querySelectorAll(".nav-links a");
 
 // Check all navbar links
 navLinks.forEach(link => {
-  // Skip login & signup links
-  if (link.getAttribute("href").includes("login") || link.getAttribute("href").includes("signup")) return;
+  let href = link.getAttribute("href");
+
+  // Allow only login, signup, privacy-policy
+  if (href.includes("login") || href.includes("signup") || href.includes("privacy-policy")) {
+    return; // ये pages बिना login के open होंगे
+  }
 
   // For others, block if not logged in
   link.addEventListener("click", function(e) {
@@ -370,8 +379,8 @@ window.addEventListener("keydown", e=>{
 popup.addEventListener("click", e=>{
   if(e.target === popup) popup.style.display = "none";
 });
-
 </script>
+
 <!-- Hero Section -->
 <header id="home" class="hero">
   <h1 class="brand">Digital World Cyber Café</h1>

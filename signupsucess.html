@@ -59,7 +59,7 @@
   }
   p{
     font-size:1.3rem;
-    margin:20px 0 40px;
+    margin:20px 0 20px;
     background:linear-gradient(90deg,#ff6a00,#ff00cc,#3333ff,#00ffcc);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -70,32 +70,23 @@
     0%{opacity:0; transform:translateY(20px);}
     100%{opacity:1; transform:translateY(0);}
   }
-  .home-btn{
-    padding:14px 35px;
-    font-size:17px;
-    border:none;
-    border-radius:15px;
-    background:linear-gradient(90deg,#ff00cc,#3333ff,#00ffcc);
-    color:#fff;
-    cursor:pointer;
-    font-weight:700;
-    box-shadow:0 0 20px rgba(255,0,204,0.6),0 0 40px rgba(51,51,255,0.4);
-    transition:all 0.3s ease;
-  }
-  .home-btn:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 30px rgba(255,0,204,0.8),0 0 60px rgba(51,51,255,0.6);
+  .redirect-msg{
+    font-size:1rem;
+    color:#444;
+    margin-top:10px;
+    font-weight:500;
   }
 </style>
 </head>
 <body>
   <div class="success-box">
     <h1 id="successMsg">Account Created Successfully!</h1>
-    <p id="welcomeMsg">Welcome, <span id="userName"></span>! Your account is ready. Please login to continue.</p>
-    <button class="home-btn" onclick="goHome()">Go to Login</button>
+    <p id="welcomeMsg">Welcome, <span id="userName"></span>! Your account is ready.</p>
+    <p class="redirect-msg" id="redirectMsg">Please wait... Redirecting to login in 30 seconds.</p>
   </div>
+
 <script>
-  // Generate confetti particles
+  // Generate confetti
   for(let i=0;i<80;i++){
     let conf=document.createElement('div');
     conf.className='confetti';
@@ -113,11 +104,19 @@
       document.getElementById('successMsg').textContent = `Your account created, ${name}!`;
       document.getElementById('userName').textContent = name;
     }
-  };
 
-  function goHome(){
-    window.location.href='login.html';
-  }
+    // Countdown + redirect (30 seconds)
+    let counter = 30;
+    const redirectMsg = document.getElementById('redirectMsg');
+    const interval = setInterval(()=>{
+      counter--;
+      redirectMsg.textContent = `Please wait... Redirecting to login in ${counter} seconds.`;
+      if(counter <= 0){
+        clearInterval(interval);
+        window.location.href='login.html';
+      }
+    },1000);
+  };
 </script>
 </body>
 </html>
