@@ -9,7 +9,155 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<!-- ========== 1) PASTE THIS IN <head> (CSS) ========== -->
 
+<style>
+  /* Small scary icon button */
+  .scary-btn {
+    position: fixed;
+    right: 20px; /* ab right corner me */
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 26px;
+    color: #ff0000;
+    background: #1a0000;
+    border: 3px solid #ff0000;
+    cursor: pointer;
+    text-shadow: 0 0 10px #ff0000, 0 0 25px #ff3333;
+    box-shadow: 0 0 20px #ff0000, 0 0 60px #ff3333, 0 0 100px #ff0000;
+    animation: pulse 1s infinite alternate;
+    transition: 0.3s;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .scary-btn:hover {
+    transform: scale(1.2) rotate(-10deg);
+    background: #330000;
+    box-shadow: 0 0 40px #ff0000, 0 0 100px #ff3333, 0 0 160px #ff0000;
+  }   
+
+    /* Shake */
+    .shake { animation:shake 0.5s; }
+    @keyframes pulse { from {box-shadow:0 0 20px #ff0000;} to {box-shadow:0 0 60px #ff3333;} }
+    @keyframes shake {
+      0% {transform:translateX(0);}
+      25% {transform:translateX(-10px);}
+      50% {transform:translateX(10px);}
+      75% {transform:translateX(-10px);}
+      100% {transform:translateX(0);}
+    }
+
+    @keyframes bgFlash {
+      0%,100% {opacity:0.1;}
+      50% {opacity:0.6;}
+    }
+
+    /* Modal Background */
+    .modal-back {
+      position:fixed; inset:0;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      background:rgba(20,0,0,0.95);
+      z-index:10000;
+      animation:fadeIn 0.4s;
+    }
+
+    /* 3D Popup Modal */
+    .modal {
+      background:linear-gradient(145deg,#330000,#1a0000);
+      border:3px solid #ff3333;
+      border-radius:20px;
+      padding:30px;
+      width:340px;
+      box-shadow:0 0 40px #ff0000, inset 0 0 30px #660000;
+      text-align:center;
+      transform:perspective(600px) rotateX(0deg);
+      animation:zoom 0.5s ease;
+    }
+    .modal h2 {
+      color:#ff5555;
+      text-shadow:0 0 15px #ff3333, 0 0 40px #ff0000;
+      margin-bottom:15px;
+    }
+    .modal input {
+      width:100%; padding:12px;
+      border-radius:8px;
+      border:1px solid #ff3333;
+      background:#1a0000;
+      color:#ff9999;
+      font-weight:bold;
+      text-align:center;
+      margin-bottom:15px;
+    }
+    .modal button {
+      padding:10px 20px;
+      border:none; border-radius:8px;
+      font-weight:bold; cursor:pointer;
+      background:linear-gradient(145deg,#ff3333,#cc0000);
+      color:#fff;
+      font-family:'Algerian', sans-serif;
+      box-shadow:0 5px 15px rgba(255,0,0,0.6);
+      transition:0.3s;
+    }
+    .modal button:hover {
+      transform:scale(1.1);
+      box-shadow:0 0 25px #ff0000;
+    }
+
+    /* Success Overlay */
+    .success-overlay {
+      position:fixed; inset:0;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      background:rgba(0,40,0,0.9);
+      z-index:20000;
+      animation:fadeIn 0.5s;
+    }
+    .success-box {
+      background:linear-gradient(145deg,#003300,#001a00);
+      border:4px solid #00ff99;
+      border-radius:20px;
+      padding:40px 50px;
+      font-size:26px;
+      font-family:'Algerian', sans-serif;
+      font-weight:bold;
+      color:#00ff88;
+      text-align:center;
+      box-shadow:0 0 25px #00ff99,0 0 60px #00ff88;
+      animation:zoom 0.5s ease;
+    }
+    .success-timer {
+      margin-top:15px;
+      font-size:18px;
+      color:#ccffcc;
+      text-shadow:0 0 5px #00ffcc;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
+    @keyframes zoom {from{transform:scale(0.7) rotateX(30deg);} to{transform:scale(1) rotateX(0deg);}}
+  </style>
+<style>
+/* Custom right-click menu + modal styles (paste into <head>) */
+:root{--bg:#0e0f14;--accent:#05f;--accent2:#ff5a7a;--text:#eef2ff}
+.ctx-menu{position:fixed;min-width:220px;background:linear-gradient(180deg,#0b1020,#0d1526);border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.8);border:1px solid rgba(255,255,255,0.05);padding:6px;z-index:99999;display:none}
+.ctx-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:var(--text);cursor:pointer;font-weight:600;font-size:0.95rem}
+.ctx-item:hover{background:linear-gradient(90deg, rgba(5,127,255,0.06), rgba(255,90,120,0.04))}
+.ctx-sep{height:1px;background:rgba(255,255,255,0.03);margin:6px 4px;border-radius:1px}
+.modal-back{position:fixed;inset:0;display:none;place-items:center;z-index:99998;background:rgba(2,6,23,0.6)}
+.modal{width:320px;border-radius:12px;padding:18px;background:linear-gradient(180deg,#081028,#0b1530);border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 30px rgba(2,6,23,0.8)}
+.modal input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:var(--text);margin-top:8px}
+.modal .actions{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}
+.btn{padding:8px 12px;border-radius:8px;font-weight:700;cursor:pointer;border:0;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001}
+.btn.ghost{background:transparent;color:#d6e1ff;border:1px solid rgba(255,255,255,0.03)}
+@media(max-width:520px){.ctx-menu{min-width:180px}.modal{width:92%}}
+</style>
   <style>
     :root {
       --blue: #00eaff;
@@ -17,15 +165,21 @@
       --pink: #ff4d6d;
       --white: #ffffff;
     }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    * {margin:0;padding:0;box-sizing:border-box}
-    body,html {
-      height:100%;
-      font-family:Poppins,sans-serif;
-      background:var(--white);
-      overflow-x:hidden;
-      color:#333;
-    }
+body, html {
+  height: 100%;
+  font-family: Poppins, sans-serif;
+  background: url("A_digital_image_showcases_a_futuristic_circuit_boa.png") no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  color: #fff; /* text ko readable banane ke liye white use karen */
+}
+
 
     body::before {
       content:"";position:fixed;inset:0;z-index:-2;
@@ -60,8 +214,8 @@
     }
 
     .logo-circle {
-      width:70px;
-      height:70px;
+      width:80px;
+      height:80px;
       border-radius:50%;
       overflow:hidden;
       animation:spin 12s linear infinite;
@@ -92,9 +246,9 @@
     }
 
     nav.nav a {
-      margin:6px 10px;
-      padding:10px 18px;
-      border-radius:40px;
+      margin:6px 3px;
+      padding:10px 15px;
+      border-radius:30px;
       text-decoration:none;
       font-weight:600;
       color:purple;
@@ -253,6 +407,95 @@
   </style>
 </head>
 <body>
+<div class="bg-flash"></div>
+
+<button class="scary-btn" id="dangerBtn" title="Do Not Click">
+  <i class="fas fa-skull-crossbones"></i>
+</button>
+
+
+<!-- Modal -->
+<div class="modal-back" id="modalBack">
+  <div class="modal">
+    <h2>🔒 Enter PassKey</h2>
+    <input type="password" id="keyInput" placeholder="Enter secret key...">
+    <button id="checkKey">Unlock</button>
+  </div>
+</div>
+
+<!-- Success -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    ✅ Access Granted!<br>
+    <div class="success-timer">Redirecting in <span id="countdown">3</span> sec...</div>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById("dangerBtn");
+  const modalBack = document.getElementById("modalBack");
+  const keyInput = document.getElementById("keyInput");
+  const checkKey = document.getElementById("checkKey");
+  const successOverlay = document.getElementById("successOverlay");
+  const countdown = document.getElementById("countdown");
+
+  // Password parts (obfuscated)
+  const p1=["Sudh","Test","Root"];
+  const p2=["anshu","Pass","Admin"];
+  const p3=["100@","Key","Lock"];
+  const p4=["1112","0000","xyz"];
+  const realKey = p1[0]+p2[0]+p3[0]+p4[0]; // Sudhanshu100@1112
+
+  btn.addEventListener("click", () => {
+    btn.classList.add("shake");
+    setTimeout(() => btn.classList.remove("shake"), 600);
+    modalBack.style.display="flex";
+    setTimeout(()=>keyInput.focus(),200);
+  });
+
+  checkKey.addEventListener("click", () => {
+    const val = keyInput.value.trim();
+    if(val === realKey){
+      modalBack.style.display="none";
+      successOverlay.style.display="flex";
+      let time=3;
+      countdown.textContent=time;
+      let interval=setInterval(()=>{
+        time--; countdown.textContent=time;
+        if(time<=0){
+          clearInterval(interval);
+          window.location.href="secure.html";
+        }
+      },1000);
+    } else {
+      alert("❌ Wrong PassKey!");
+    }
+  });
+</script>
+<!-- ========== 2) PASTE THIS IN <body> WHERE YOU WANT THE MENU ELEMENTS (e.g. near end of <body>) ========== -->
+<!-- Custom Context Menu -->
+<div id="ctx" class="ctx-menu" aria-hidden="true">
+  <div class="ctx-item" id="ctx_view"><i class="fa fa-eye"></i> View page <span style="margin-left:auto;font-size:0.75rem;background:rgba(255,255,255,0.06);padding:4px 8px;border-radius:999px;color:#dbeafe">Open</span></div>
+  <div class="ctx-item" id="ctx_download"><i class="fa fa-download"></i> Download sample image</div>
+  <div class="ctx-item" id="ctx_refresh"><i class="fa fa-rotate"></i> Refresh</div>
+  <div class="ctx-sep"></div>
+  <!-- secret entry (hidden unless unlocked) -->
+  <div class="ctx-item" id="ctx_secret" style="display:none;"><i class="fa fa-lock-open"></i> Secret Action</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" id="ctx_help"><i class="fa fa-question-circle"></i> Help</div>
+</div>
+
+<!-- Modal for passphrase -->
+<div id="modalBack" class="modal-back" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal">
+    <div style="font-weight:800;color:var(--accent)">Enter Secret Passphrase</div>
+    <input type="password" id="passInput" placeholder="Type passphrase here" autocomplete="off" />
+    <div class="actions">
+      <button class="btn ghost" id="modalCancel">Cancel</button>
+      <button class="btn" id="modalOk">Unlock</button>
+    </div>
+  </div>
+</div>
 
 <!-- Navbar -->
 <nav class="nav">
@@ -262,19 +505,14 @@
 
   <div class="nav-links">
     <a href="home.html"><i class="fa fa-house"></i>Home</a>
-    <a href="services.html"><i class="fa fa-screwdriver-wrench"></i>Services</a>
-    <a href="about.html"><i class="fa fa-circle-info"></i>About</a>
-    <a href="contact.html"><i class="fa fa-envelope"></i>Contact</a>
-    <a href="gaming.html"><i class="fa fa-gamepad"></i>Gaming</a>
-    <a href="printing.html"><i class="fa fa-print"></i>Printing</a>
-    <a href="payments.html"><i class="fa fa-qrcode"></i>Payments</a>
-    <a href="tickets.html"><i class="fa fa-ticket"></i>Tickets</a>
-    <a href="photos.html"><i class="fa fa-id-card"></i>Photos</a>
-    <a href="support.html"><i class="fa fa-headset"></i>Support</a>
+    <a href="#services.html"><i class="fa fa-screwdriver-wrench"></i>Services</a>
+    <a href="#about.html"><i class="fa fa-circle-info"></i>About</a>
+    <a href="#contact.html"><i class="fa fa-envelope"></i>Contact</a>
+    <a href="#printing.html"><i class="fa fa-print"></i>Printing</a>
+   <a href="#photos.html"><i class="fa fa-id-card"></i>Photos</a>
+    <a href="#support.html"><i class="fa fa-headset"></i>Support</a>
     <a href="gallery.html"><i class="fa fa-image"></i>Gallery</a>
-    <a href="book.html"><i class="fa fa-bolt"></i>Book</a>
-    <a href="softwares.html"><i class="fa fa-code"></i>Softwares</a>
-    <a href="privacy-policy.html"><i class="fa fa-shield-alt"></i>Privacy Policy</a>
+    <a href="#softwares.html"><i class="fa fa-code"></i>Softwares</a>
     <a href="login.html" style="color: blue;"><i class="fas fa-sign-in-alt"></i> Login</a>
     <a href="signup.html" style="color: blue;"><i class="fas fa-user-plus"></i> Sign Up</a>
   </div>
@@ -283,58 +521,95 @@
     <img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo">
   </div>
 </nav>
-
-<!-- Popup Box -->
-<div class="popup-overlay" id="popup">
-  <div class="popup-box">
-    <h2>⚠ Please <span style="color:var(--blue);">Login</span> or <span style="color:var(--pink);">Sign Up</span> first to explore these features!</h2>
-    <div class="btns">
-      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
-      <a href="signup.html"><i class="fas fa-user-plus"></i> Sign Up</a>
-    </div>
-  </div>
-</div>
-
 <!-- Hero Section -->
 <header id="home" class="hero">
   <h1 class="brand">Digital World Cyber Café</h1>
-  <p class="tag">Welcome to your one-stop digital hub 🚀</p>
-  <a href="exploreservices.html" class="hero-btn"><i class="fa fa-arrow-right"></i> Explore Services</a>
+   <a href="#exploreservices.html" class="hero-btn"><i class="fas fa-compass"></i> Explore Services</a>
 </header>
+<!-- ========== 3) PASTE THIS BEFORE </body> (JavaScript). Also include FontAwesome if not present already) ========== -->
+<!-- FontAwesome (icon) - include once on the page if not already present -->
 
 <script>
- // Default: user not logged in
-let isLoggedIn = false;
+(function(){
+  const ctx = document.getElementById('ctx');
+  const secretItem = document.getElementById('ctx_secret');
+  const PASS_PHRASE = "MeraSecret2025!"; // <<< change to your secret
+  const STORAGE_KEY = "dwc_secret_unlocked_v1";
 
-const popup = document.getElementById("popup");
-const navLinks = document.querySelectorAll(".nav-links a");
-
-navLinks.forEach(link => {
-  let href = link.getAttribute("href");
-
-  // Allow only login, signup, privacy-policy, about
-  if (href.includes("login") || href.includes("signup") || href.includes("privacy-policy") || href.includes("about")) {
-    return; 
+  function showMenu(x,y){
+    ctx.style.display = 'block';
+    ctx.style.left = x + 'px';
+    ctx.style.top = y + 'px';
+    ctx.setAttribute('aria-hidden','false');
+    const rect = ctx.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+    if(rect.right > vw) ctx.style.left = (vw - rect.width - 12) + 'px';
+    if(rect.bottom > vh) ctx.style.top = (vh - rect.height - 12) + 'px';
   }
+  function hideMenu(){ ctx.style.display = 'none'; ctx.setAttribute('aria-hidden','true'); }
 
-  // For others, block if not logged in
-  link.addEventListener("click", function(e) {
-    if(!isLoggedIn){
-      e.preventDefault();
-      popup.style.display = "flex";
-    }
+  window.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+    const tag = e.target.tagName.toLowerCase();
+    if(tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+    showMenu(e.clientX, e.clientY);
   });
-});
 
-// ESC key closes popup
-window.addEventListener("keydown", e=>{
-  if(e.key === "Escape") popup.style.display = "none";
-});
+  window.addEventListener('pointerdown', function(e){
+    if(!ctx.contains(e.target)) hideMenu();
+  });
+  window.addEventListener('keydown', function(e){ if(e.key === 'Escape') hideMenu(); });
 
-// Click outside closes popup
-popup.addEventListener("click", e=>{
-  if(e.target === popup) popup.style.display = "none";
-});
+  document.getElementById('ctx_view').addEventListener('click', function(){ hideMenu(); alert("Page: " + document.title); });
+  document.getElementById('ctx_download').addEventListener('click', async function(){
+    hideMenu();
+    const imgUrl = "#";
+    try {
+      const res = await fetch(imgUrl, {mode:'cors'});
+      const blob = await res.blob();
+      const u = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = u; a.download = 'sample-01.jpg';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u);
+    } catch (err) { alert('Download failed: '+ err); }
+  });
+  document.getElementById('ctx_refresh').addEventListener('click', function(){ hideMenu(); location.reload(); });
+  document.getElementById('ctx_help').addEventListener('click', function(){ hideMenu(); alert('Custom menu active. To unlock secret: press Ctrl+Alt+K.'); });
+
+  secretItem.addEventListener('click', function(){ hideMenu(); alert('Secret action executed.'); /* change to your secret action */ });
+
+  const modalBack = document.getElementById('modalBack');
+  const passInput = document.getElementById('passInput');
+  const modalOk = document.getElementById('modalOk');
+  const modalCancel = document.getElementById('modalCancel');
+
+  function openModal(){ modalBack.style.display = 'grid'; modalBack.setAttribute('aria-hidden','false'); passInput.value=''; setTimeout(()=>passInput.focus(),150); }
+  function closeModal(){ modalBack.style.display = 'none'; modalBack.setAttribute('aria-hidden','true'); }
+
+  modalCancel.addEventListener('click', closeModal);
+  modalBack.addEventListener('pointerdown', function(e){ if(e.target === modalBack) closeModal(); });
+
+  modalOk.addEventListener('click', function(){
+    const v = passInput.value || '';
+    if(v === PASS_PHRASE){
+      sessionStorage.setItem(STORAGE_KEY, '1');
+      updateSecretVisibility(true);
+      closeModal();
+      alert('Unlocked — secret menu visible for this session.');
+    } else alert('Wrong passphrase.');
+  });
+
+  window.addEventListener('keydown', function(e){
+    if(e.ctrlKey && e.altKey && e.key.toLowerCase() === 'k') openModal();
+    const blocked = (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'u'));
+    if(blocked){ e.preventDefault(); e.stopPropagation(); alert('This shortcut is disabled on this page.'); }
+  });
+
+  function updateSecretVisibility(unlocked){ secretItem.style.display = unlocked ? 'flex' : 'none'; }
+  updateSecretVisibility(sessionStorage.getItem(STORAGE_KEY) === '1');
+
+  window.addEventListener('keyup', function(e){ if(e.key === 'ContextMenu' || (e.shiftKey && e.key === 'F10')) e.preventDefault(); });
+})();
 </script>
 
 </body>
