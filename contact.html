@@ -36,10 +36,8 @@ header.hero p{color:#ccc;font-size:18px;margin-top:10px;}
 .contact-info ul{list-style:none;margin:0;padding:0;}
 .contact-info ul li{margin:12px 0;display:flex;align-items:center;gap:12px;}
 .contact-info i{color:var(--blue);}
-form input, form textarea{width:100%;padding:12px;margin:10px 0;border:none;border-radius:10px;outline:none;font-size:15px;}
-form input:focus, form textarea:focus{box-shadow:0 0 10px var(--blue);}
-form button{background:linear-gradient(90deg,var(--blue),var(--purple));border:none;padding:12px 25px;color:#fff;font-size:16px;font-weight:600;border-radius:30px;cursor:pointer;transition:.3s;}
-form button:hover{transform:scale(1.08);box-shadow:0 0 20px var(--purple),0 0 30px var(--blue);}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;width:100%;padding:14px;margin-top:20px;border-radius:50px;font-size:18px;font-weight:600;color:#fff;text-decoration:none;background:linear-gradient(90deg,#25d366,#128c7e);box-shadow:0 0 20px #25d366,0 0 30px #128c7e;transition:.3s;}
+.whatsapp-btn:hover{transform:scale(1.08);box-shadow:0 0 30px #25d366,0 0 40px #128c7e;}
 footer{text-align:center;padding:25px;color:#fff;background:rgba(0,0,0,0.4);margin-top:40px;border-top:2px solid var(--purple);box-shadow:0 0 15px var(--blue),0 0 20px var(--purple);}
 footer a{color:var(--blue);text-decoration:none;}
 @media(max-width:900px){.container{grid-template-columns:1fr;}}
@@ -65,19 +63,17 @@ footer a{color:var(--blue);text-decoration:none;}
   <p>We’re here to assist you. Reach out for any queries, support, or feedback.</p>
 </header>
 
-<!-- Success/Error Message -->
-<?php if (!empty($status)) echo $status; ?>
 <div class="container">
-  <!-- Contact Form -->
+  <!-- WhatsApp Messaging -->
   <div class="contact-box">
-    <h2>Send Us a Message</h2>
-    <form action="" method="post">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <input type="text" name="subject" placeholder="Subject">
-      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="submit"><i class="fa fa-paper-plane"></i> Send Message</button>
-    </form>
+    <h2>Chat With Us on WhatsApp</h2>
+    <p>You can instantly connect with our support team via WhatsApp. Click below to start chatting:</p>
+    <a href="https://wa.me/918986029267?text=Hello%20Digital%20World%20Cyber%20Café%2C%20I%20need%20assistance." target="_blank" class="whatsapp-btn">
+      <i class="fab fa-whatsapp"></i> Message Us on WhatsApp
+    </a>
+    <p style="margin-top:15px;color:#ccc;font-size:14px;">
+      📞 WhatsApp Number: <strong>+91 89860 29267</strong>
+    </p>
   </div>
 
   <!-- Contact Information -->
@@ -85,7 +81,7 @@ footer a{color:var(--blue);text-decoration:none;}
     <h2>Our Contact Information</h2>
     <ul>
       <li><i class="fa fa-location-dot"></i> Address: Main Street, Digital Town, Cyber City</li>
-      <li><i class="fa fa-phone"></i> Phone: +92 300 1234567</li>
+      <li><i class="fa fa-phone"></i> Phone: +91 89860 29267</li>
       <li><i class="fa fa-envelope"></i> Email: <a href="mailto:digitalworldcybercafeservices100@gmail.com">digitalworldcybercafeservices100@gmail.com</a></li>
       <li><i class="fa fa-clock"></i> Working Hours: Mon - Sat | 9:00 AM - 10:00 PM</li>
     </ul>
