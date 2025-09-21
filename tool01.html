@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chaliye — AI Tool for Website (Single file)</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#10b981;--muted:#9aa4b2;--glass:rgba(255,255,255,0.03)}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,#071025 0%, #071631 100%);color:#e6eef6;padding:24px;box-sizing:border-box}
+    .container{max-width:980px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    header h1{font-size:20px;margin:0}
+    header p{color:var(--muted);margin:0;font-size:13px}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(2,6,23,0.6);}
+    .controls{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    select,input[type=text]{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{width:100%;min-height:140px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:inherit;resize:vertical}
+    button{background:var(--accent);border:none;color:#022;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+    .row{display:grid;grid-template-columns:1fr 360px;gap:14px}
+    .examples{display:flex;flex-direction:column;gap:8px}
+    .chip{background:rgba(255,255,255,0.03);padding:8px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .history{max-height:320px;overflow:auto;margin-top:10px;display:flex;flex-direction:column;gap:8px}
+    .msg{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+    footer{margin-top:12px;color:var(--muted);font-size:13px}
+    @media(max-width:900px){.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Chaliye — AI Tool for Website</h1>
+        <p>Single-file demo page: prompt → AI → reply. Spanish / Hindi friendly.</p>
+      </div>
+      <div style="text-align:right;color:var(--muted)">v1 • demo</div>
+    </header>
+
+    <div class="card">
+      <div class="controls">
+        <select id="lang">
+          <option value="hi">Hindi (हिन्दी)</option>
+          <option value="en">English</option>
+        </select>
+        <input id="title" type="text" placeholder="Tool name (optional)" />
+        <select id="model">
+          <option value="gpt-5-thinking-mini">GPT-5 Thinking mini</option>
+          <option value="gpt-4o">GPT-4o</option>
+        </select>
+        <button id="sendBtn">Run AI</button>
+      </div>
+
+      <div class="row">
+        <div>
+          <textarea id="prompt" placeholder="Type your instruction here...\n(उदाहरण: एक छोटा product description लिखो — 40 शब्द) "></textarea>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <button id="clearBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);">Clear</button>
+            <button id="copyBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);">Copy output</button>
+            <div style="margin-left:auto;color:var(--muted);font-size:13px">Local demo — add server to call real API</div>
+          </div>
+
+          <div class="history card" id="history" style="margin-top:12px;background:transparent;padding:10px;max-height:260px"></div>
+        </div>
+
+        <aside class="card" style="display:flex;flex-direction:column;gap:10px">
+          <strong>Examples / उदाहरण</strong>
+          <div class="examples">
+            <div class="chip">एक 3-line blog intro लिखो: AI और छोटी दुकानें</div>
+            <div class="chip">Website के लिए 'about us' — friendly tone</div>
+            <div class="chip">Generate meta description (60 char)</div>
+            <div class="chip">Translate to English</div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label style="font-size:13px;color:var(--muted)">Output</label>
+            <div id="output" class="msg" style="min-height:120px">(AI output will appear here)</div>
+          </div>
+
+          <div style="margin-top:auto;display:flex;gap:6px;justify-content:space-between;align-items:center">
+            <small style="color:var(--muted)">Host: static HTML</small>
+            <small style="color:var(--muted)">Backend: /api/generate</small>
+          </div>
+        </aside>
+      </div>
+
+      <footer>
+        <strong>How to connect real AI:</strong> Create a small server endpoint (example Node/Express) that calls OpenAI with your API key and exposes POST /api/generate. The page sends prompt+model to that endpoint. Keep the key on server — do NOT put it in client JS.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Minimal client logic. By default this demo will mock responses.
+    const sendBtn = document.getElementById('sendBtn')
+    const promptEl = document.getElementById('prompt')
+    const outputEl = document.getElementById('output')
+    const historyEl = document.getElementById('history')
+    const examples = Array.from(document.querySelectorAll('.chip'))
+    const clearBtn = document.getElementById('clearBtn')
+    const copyBtn = document.getElementById('copyBtn')
+
+    examples.forEach(el=>el.addEventListener('click', ()=>{ promptEl.value = el.textContent; }))
+    clearBtn.addEventListener('click', ()=>{ promptEl.value=''; outputEl.textContent='(AI output will appear here)'; })
+    copyBtn.addEventListener('click', ()=>{ navigator.clipboard.writeText(outputEl.textContent||'') })
+
+    function addHistory(role, text){
+      const d = document.createElement('div'); d.className='msg'; d.innerHTML = '<strong>'+role+':</strong> <div style="margin-top:6px">'+escapeHtml(text)+'</div>'
+      historyEl.prepend(d)
+    }
+
+    function escapeHtml(s){ return s.replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])) }
+
+    async function callBackend(prompt, model){
+      // NOTE: This client expects a server endpoint at /api/generate that accepts {prompt,model}
+      // If you don't have a server, this demo returns a mocked reply.
+      try{
+        const resp = await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,model})})
+        if(!resp.ok) throw new Error('server error '+resp.status)
+        const data = await resp.json()
+        return data.output || 'No output from server.'
+      }catch(e){
+        // fallback mock — simple transformation so demo works without server
+        return 'Demo reply (mock): ' + prompt.slice(0,300) + (prompt.length>300?'...':'')
+      }
+    }
+
+    sendBtn.addEventListener('click', async ()=>{
+      const prompt = promptEl.value.trim(); if(!prompt) return alert('Please enter a prompt')
+      const model = document.getElementById('model').value
+      sendBtn.disabled = true; sendBtn.textContent = 'Running...'
+      addHistory('User', prompt)
+      const result = await callBackend(prompt, model)
+      outputEl.textContent = result
+      addHistory('AI', result)
+      sendBtn.disabled = false; sendBtn.textContent = 'Run AI'
+    })
+
+  </script>
+</body>
+</html>
