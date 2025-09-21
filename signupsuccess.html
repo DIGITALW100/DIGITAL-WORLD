@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Successful</title>
+<title>Account Created Successfully</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -12,7 +12,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(-45deg,#6a11cb,#2575fc,#ff6a00,#ff0058);
+    background:linear-gradient(-45deg,#ff6a00,#ff0058,#6a11cb,#2575fc);
     background-size:400% 400%;
     animation:gradientMove 12s ease infinite;
     font-family:Poppins,sans-serif;
@@ -25,7 +25,7 @@
   /* Confetti */
   .confetti{
     position:absolute;
-    background:linear-gradient(45deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
+    background:linear-gradient(45deg,#ff00cc,#3333ff,#00ffcc,#ffdd00);
     opacity:0.85;
     animation:fall 6s linear infinite;
     border-radius:2px;
@@ -36,7 +36,7 @@
   }
 
   /* Success Box */
-  .login-success-box{
+  .success-box{
     z-index:10;
     animation:popIn 1.2s ease;
     max-width:600px;
@@ -49,7 +49,7 @@
   h1{
     font-family:Orbitron,sans-serif;
     font-size:clamp(1.8rem,5vw,3rem);
-    background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
+    background:linear-gradient(90deg,#ff00cc,#3333ff,#00ffcc,#ffdd00);
     background-size:400% 400%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -72,7 +72,7 @@
     font-weight:600;
   }
   #welcomeMsg{
-    background:linear-gradient(90deg,#00ffcc,#3333ff,#ff00cc,#ffdd00);
+    background:linear-gradient(90deg,#ff6a00,#ff00cc,#3333ff,#00ffcc);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:fadeSlide 2s ease forwards;
@@ -99,10 +99,10 @@
 </style>
 </head>
 <body>
-  <div class="login-success-box">
-    <h1 id="successMsg">Login Successful!</h1>
-    <p id="welcomeMsg">Welcome, <span id="userName"></span>! You have successfully logged in.</p>
-    <p class="redirect-msg" id="redirectMsg">Please wait... Redirecting to Home in 30 seconds.</p>
+  <div class="success-box">
+    <h1 id="successMsg">Account Created Successfully!</h1>
+    <p id="welcomeMsg">Welcome, <span id="userName"></span>! Your account is ready.</p>
+    <p class="redirect-msg" id="redirectMsg">Please wait... Redirecting to login in 30 seconds.</p>
   </div>
 
 <script>
@@ -120,22 +120,20 @@
     const currentUser = localStorage.getItem('currentUser');
     if(currentUser){
       const users = JSON.parse(localStorage.getItem('users') || '{}');
-      const name = users[currentUser] ? users[currentUser].name : 'User';
-      document.getElementById('successMsg').textContent = `Login Successful, ${name}!`;
+      const name = users[currentUser] ? users[currentUser].name : '';
+      document.getElementById('successMsg').textContent = `Your account created, ${name}!`;
       document.getElementById('userName').textContent = name;
-    } else {
-      window.location.href='signup.html';
     }
 
-    // Countdown + redirect (30s)
+    // Countdown + Redirect (30s)
     let counter = 30;
     const redirectMsg = document.getElementById('redirectMsg');
     const interval = setInterval(()=>{
       counter--;
-      redirectMsg.textContent = `Please wait... Redirecting to Home in ${counter} seconds.`;
+      redirectMsg.textContent = `Please wait... Redirecting to login in ${counter} seconds.`;
       if(counter <= 0){
         clearInterval(interval);
-        window.location.href='loginpage.html'; // Redirect to Home
+        window.location.href='login.html';
       }
     },1000);
   };

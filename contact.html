@@ -1,98 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us - Digital World Cyber Café</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Digital World Cyber Café</title>
 
-<style>
-:root { --blue: #00aaff; --purple: #7d3cff; --white: #ffffff; }
-*{margin:0;padding:0;box-sizing:border-box;}
-body, html{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ffffff,#e6f0ff,#f5f0ff);background-size:400% 400%;animation:gradient 15s ease infinite;color:#fff;overflow-x:hidden;}
-@keyframes gradient {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-nav.nav{position:sticky;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:12px 25px;z-index:1000;background:rgba(255,255,255,0.12);backdrop-filter:blur(14px);border:2px solid var(--purple);border-radius:14px;box-shadow:0 0 20px var(--purple),0 0 40px rgba(125,60,255,0.6);animation:glowBorder 3s infinite alternate;}
-@keyframes glowBorder{from {box-shadow:0 0 15px var(--purple),0 0 30px rgba(125,60,255,0.6);}to {box-shadow:0 0 25px var(--blue),0 0 45px rgba(0,170,255,0.8);}}
-.logo-circle{width:80px;height:80px;border-radius:50%;overflow:hidden;animation:spin 12s linear infinite;box-shadow:0 0 25px var(--blue),0 0 40px var(--purple);flex-shrink:0;transition:all .3s ease;}
-.logo-circle:hover{transform:scale(1.15);box-shadow:0 0 35px var(--blue), 0 0 60px var(--purple);}
-.logo-circle img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
-@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-.nav-links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;}
-.nav-links a{margin:6px 10px;padding:12px 20px;border-radius:40px;text-decoration:none;font-weight:600;color:purple;position:relative;background:rgba(255,255,255,0.15);border:1px solid rgba(125,60,255,0.4);box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:all .4s ease;display:flex;align-items:center;gap:8px;overflow:hidden;}
-.nav-links a::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);transition:.5s;}
-.nav-links a:hover::before{left:100%;}
-.nav-links a:hover{color:var(--blue);background:rgba(255,255,255,0.35);box-shadow:0 0 15px var(--purple),0 0 30px rgba(0,170,255,.6);transform:scale(1.12);}
-header.hero{text-align:center;padding:140px 20px 60px}
-header.hero h1{font-family:Orbitron,sans-serif;font-size:clamp(40px,6vw,75px);background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s infinite alternate;}
-header.hero p{color:#ccc;font-size:18px;margin-top:10px;}
-@keyframes glow{from{text-shadow:0 0 8px var(--blue)} to{text-shadow:0 0 20px var(--purple)}}
-.container{max-width:1100px;margin:40px auto;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:30px;}
-.contact-box{background:rgba(0,0,0,0.6);padding:25px;border-radius:20px;box-shadow:0 0 25px var(--purple),0 0 40px var(--blue);}
-.contact-box h2{color:var(--blue);margin-bottom:20px;border-bottom:2px solid var(--purple);padding-bottom:5px;}
-.contact-box p, .contact-box li{line-height:1.8;color:#fff;}
-.contact-info ul{list-style:none;margin:0;padding:0;}
-.contact-info ul li{margin:12px 0;display:flex;align-items:center;gap:12px;}
-.contact-info i{color:var(--blue);}
-.whatsapp-btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;width:100%;padding:14px;margin-top:20px;border-radius:50px;font-size:18px;font-weight:600;color:#fff;text-decoration:none;background:linear-gradient(90deg,#25d366,#128c7e);box-shadow:0 0 20px #25d366,0 0 30px #128c7e;transition:.3s;}
-.whatsapp-btn:hover{transform:scale(1.08);box-shadow:0 0 30px #25d366,0 0 40px #128c7e;}
-footer{text-align:center;padding:25px;color:#fff;background:rgba(0,0,0,0.4);margin-top:40px;border-top:2px solid var(--purple);box-shadow:0 0 15px var(--blue),0 0 20px var(--purple);}
-footer a{color:var(--blue);text-decoration:none;}
-@media(max-width:900px){.container{grid-template-columns:1fr;}}
-</style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #00eaff;
+      --purple: #9b59ff;
+      --pink: #ff4d6d;
+      --white: #ffffff;
+      --card-bg: rgba(35, 10, 70, 0.92);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--white);
+      background: url("A_digital_image_showcases_a_futuristic_circuit_boa.png") no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ffffff, #e6f0ff, #f5f0ff);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      filter: blur(40px);
+      z-index: -1;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Navbar */
+    nav.nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 2px solid var(--purple);
+      border-radius: 14px;
+      margin: 8px auto;
+      max-width: 1200px;
+      box-shadow: 0 0 20px var(--purple), 0 0 40px rgba(125, 60, 255, 0.6);
+      animation: glowBorder 3s infinite alternate;
+      z-index: 1000;
+    }
+    @keyframes glowBorder {
+      from { box-shadow: 0 0 15px var(--purple); }
+      to { box-shadow: 0 0 25px var(--blue); }
+    }
+
+    .logo-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: spin 12s linear infinite;
+      box-shadow: 0 0 20px var(--blue), 0 0 30px var(--purple);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .logo-circle:hover { transform: scale(1.1); }
+    .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      flex: 1;
+    }
+    nav.nav a {
+      padding: 8px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--purple);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(125, 60, 255, 0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    nav.nav a:hover {
+      color: var(--blue);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 15px var(--purple), 0 0 25px var(--blue);
+      transform: scale(1.05);
+    }
+
+    /* Hero */
+    header.hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+    .brand {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(32px, 6vw, 60px);
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowTitle 3s infinite alternate;
+    }
+    @keyframes glowTitle {
+      from { text-shadow: 0 0 8px var(--blue); }
+      to { text-shadow: 0 0 20px var(--purple); }
+    }
+    header.hero p {
+      margin-top: 10px;
+      color: #ddd;
+      font-size: 1.1rem;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto 70px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    /* Contact Cards */
+    .contact-box {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 0 15px var(--blue), 0 0 25px var(--purple), inset 0 0 25px var(--pink);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-box:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 20px var(--blue), 0 0 35px var(--purple), inset 0 0 35px var(--blue);
+    }
+    .contact-box h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.5rem;
+      color: var(--blue);
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--purple);
+      padding-bottom: 5px;
+    }
+    .contact-box p, .contact-box li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+    .contact-info ul { list-style: none; padding: 0; }
+    .contact-info ul li {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .contact-info i { color: var(--blue); }
+
+    /* WhatsApp */
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(90deg, #25d366, #128c7e);
+      box-shadow: 0 0 20px #25d366, 0 0 30px #128c7e;
+      transition: 0.3s;
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #25d366, 0 0 40px #128c7e;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.4);
+      border-top: 2px solid var(--purple);
+      box-shadow: 0 0 15px var(--blue), 0 0 20px var(--purple);
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+  </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="logo-circle"><img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo"></div>
-  <div class="nav-links">
-    <a href="home.html"><i class="fa fa-house"></i>Home</a>
-    <a href="services.html"><i class="fa fa-screwdriver-wrench"></i>Services</a>
-    <a href="about.html"><i class="fa fa-circle-info"></i>About</a>
-    <a href="contact.php"><i class="fa fa-envelope"></i>Contact</a>
-    <a href="profile.html"><i class="fa fa-user"></i>Profile</a>
-    <a href="privacy-policy.html"><i class="fa fa-shield-alt"></i>Privacy & Policy</a>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="logo-circle"><img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo" /></div>
+    <div class="nav-links">
+      <a href="home.html"><i class="fa fa-house"></i> Home</a>
+      <a href="services.html"><i class="fa fa-cogs"></i> Services</a>
+      <a href="about.html"><i class="fa fa-circle-info"></i> About</a>
+      <a href="contact.html"><i class="fa fa-envelope"></i> Contact</a>
+    </div>
+    <div class="logo-circle"><img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo" /></div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="brand">Contact Us</h1>
+    <p>We’re here to assist you. Reach out for any queries, support, or feedback.</p>
+  </header>
+
+  <!-- Contact Section -->
+  <div class="container">
+    <!-- WhatsApp -->
+    <div class="contact-box">
+      <h2>Chat With Us on WhatsApp</h2>
+      <p>Connect with our support team instantly via WhatsApp:</p>
+      <a href="https://wa.me/918986029267?text=Hello%20Digital%20World%20Cyber%20Café%2C%20I%20need%20assistance." target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i> Message Us on WhatsApp
+      </a>
+      <p style="margin-top:15px;color:#ccc;font-size:14px;">
+        📞 WhatsApp Number: <strong>+91 89860 29267</strong>
+      </p>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="contact-box contact-info">
+      <h2>Our Contact Information</h2>
+      <ul>
+        <li><i class="fa fa-location-dot"></i> Address: Main Street, Digital Town, Cyber City</li>
+        <li><i class="fa fa-phone"></i> Phone: +91 89860 29267</li>
+        <li><i class="fa fa-envelope"></i> Email: <a href="mailto:digitalworldcybercafeservices100@gmail.com">digitalworldcybercafeservices100@gmail.com</a></li>
+        <li><i class="fa fa-clock"></i> Working Hours: Mon - Sat | 9:00 AM - 10:00 PM</li>
+      </ul>
+      <h2>Find Us</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border-radius:15px;border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
   </div>
-  <div class="logo-circle"><img src="https://i.ibb.co/r2mZRzSF/logo.png" alt="DWC Logo"></div>
-</nav>
 
-<header class="hero">
-  <h1>Contact Us</h1>
-  <p>We’re here to assist you. Reach out for any queries, support, or feedback.</p>
-</header>
-
-<div class="container">
-  <!-- WhatsApp Messaging -->
-  <div class="contact-box">
-    <h2>Chat With Us on WhatsApp</h2>
-    <p>You can instantly connect with our support team via WhatsApp. Click below to start chatting:</p>
-    <a href="https://wa.me/918986029267?text=Hello%20Digital%20World%20Cyber%20Café%2C%20I%20need%20assistance." target="_blank" class="whatsapp-btn">
-      <i class="fab fa-whatsapp"></i> Message Us on WhatsApp
-    </a>
-    <p style="margin-top:15px;color:#ccc;font-size:14px;">
-      📞 WhatsApp Number: <strong>+91 89860 29267</strong>
-    </p>
-  </div>
-
-  <!-- Contact Information -->
-  <div class="contact-box contact-info">
-    <h2>Our Contact Information</h2>
-    <ul>
-      <li><i class="fa fa-location-dot"></i> Address: Main Street, Digital Town, Cyber City</li>
-      <li><i class="fa fa-phone"></i> Phone: +91 89860 29267</li>
-      <li><i class="fa fa-envelope"></i> Email: <a href="mailto:digitalworldcybercafeservices100@gmail.com">digitalworldcybercafeservices100@gmail.com</a></li>
-      <li><i class="fa fa-clock"></i> Working Hours: Mon - Sat | 9:00 AM - 10:00 PM</li>
-    </ul>
-    <h2>Find Us</h2>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border-radius:15px;border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </div>
-</div>
-
-<footer>
-  &copy; 2025 Digital World Cyber Café | <a href="mailto:digitalworldcybercafeservices100@gmail.com">Contact Us</a>
-</footer>
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Digital World Cyber Café | <a href="mailto:digitalworldcybercafeservices100@gmail.com">Contact Us</a>
+  </footer>
 
 </body>
 </html>
