@@ -145,7 +145,8 @@
     }
   </style>
 </head>
-<body>
+
+
 
 <!-- Context Menu -->
 <div id="ctx" class="ctx-menu">
@@ -260,5 +261,192 @@
   hamburger.addEventListener("click",()=>navLinks.classList.toggle("show"));
 })();
 </script>
+<!-- ✅ सिर्फ यहां ON या OFF लिखना है -->
+<script>
+  var offerStatus = "ON";   // 👉 "ON" = Offer Available + Celebration, "OFF" = Not Available
+</script>
+
+<!-- 🔔 Offer Alert Box -->
+<div class="offer-alert" id="offerAlert">
+  <div class="offer-header" id="offerHeader"></div>
+  <div class="offer-body">
+    <p id="offerNote"></p>
+    <button id="offerBtn" class="offer-btn" style="display:none;">
+      🚀 Claim Now
+    </button>
+  </div>
+</div>
+
+<!-- 🔥 Fullscreen Offer Popup -->
+<div id="offerPopup" class="offer-popup" style="display:none;">
+  <div class="offer-content">
+    <h1>🎉 Claim & Enjoy Offer Now 🎉</h1>
+    <p>✅ सभी Free और Paid Tools & Software अगले 
+      <strong>15 दिन</strong> तक बिल्कुल <strong>Free</strong> उपलब्ध हैं।</p>
+    <div class="btn-group">
+      <button class="claim-btn" onclick="claimOffer()">🚀 Claim Now</button>
+      <button class="not-claim-btn" onclick="closeOffer()">❌ Not Claim</button>
+    </div>
+  </div>
+</div>
+
+<!-- Canvas for Confetti + Fireworks -->
+<canvas id="confettiCanvas"></canvas>
+
+<style>
+/* ===== Offer Alert ===== */
+.offer-alert{
+  width:100%;
+  max-width:700px;
+  margin:40px auto;
+  padding:22px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#6a11cb,#2575fc);
+  color:#fff;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+  font-family:"Segoe UI", Arial, sans-serif;
+  transition:all .3s ease;
+}
+.offer-alert:hover{transform:scale(1.02);box-shadow:0 10px 28px rgba(0,0,0,0.35);}
+.offer-header{font-size:24px;font-weight:700;margin-bottom:14px;text-shadow:0 0 6px rgba(255,255,255,.5);}
+.offer-body p{font-size:17px;font-weight:500;margin:0 0 12px 0;line-height:1.6;}
+.offer-btn{
+  padding:12px 28px;font-size:16px;font-weight:600;border:none;border-radius:40px;
+  background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#fff;cursor:pointer;
+  transition:.3s;box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+.offer-btn:hover{background:linear-gradient(135deg,#feb47b,#ff7e5f);transform:scale(1.05);}
+
+/* ===== Fullscreen Popup ===== */
+.offer-popup{
+  position: fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;
+  z-index:99999;animation: fadeIn .6s ease-in-out;
+}
+.offer-content{
+  text-align:center;background:linear-gradient(135deg,#6a11cb,#2575fc);
+  padding:35px 25px;border-radius:18px;color:#fff;
+  max-width:520px;width:92%;box-shadow:0 8px 28px rgba(0,0,0,.4);animation: popIn .6s ease;
+}
+.offer-content h1{font-size:28px;margin-bottom:12px;text-shadow:0 0 10px rgba(255,255,255,.6);}
+.offer-content p{font-size:18px;margin-bottom:22px;font-weight:500;}
+.btn-group{display:flex;gap:12px;justify-content:center;}
+.claim-btn,.not-claim-btn{
+  padding:12px 28px;font-size:16px;font-weight:700;border:none;border-radius:40px;
+  cursor:pointer;transition:all .3s;box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+.claim-btn{background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#fff;}
+.claim-btn:hover{transform:scale(1.05);background:linear-gradient(135deg,#feb47b,#ff7e5f);}
+.not-claim-btn{background:#eee;color:#333;}
+.not-claim-btn:hover{background:#ddd;transform:scale(1.05);}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* Confetti Canvas */
+#confettiCanvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:100000;
+}
+</style>
+
+<script>
+// ========== Offer Status Control ==========
+document.addEventListener("DOMContentLoaded", function(){
+  const header = document.getElementById("offerHeader");
+  const note   = document.getElementById("offerNote");
+  const btn    = document.getElementById("offerBtn");
+  const popup  = document.getElementById("offerPopup");
+
+  if(offerStatus.toUpperCase() === "ON"){
+    // ✅ Offer Available
+    header.innerHTML = '<i class="fa fa-gift"></i> 🎁 Offer Available';
+    note.textContent = "🎉 सभी Free और Paid Tools & Software अभी Free में उपलब्ध हैं।";
+    btn.style.display = "inline-block";
+    btn.onclick = ()=> window.location.href = "freeacesssalltoolanadsoftware.html";
+    popup.style.display = "flex";
+
+    startConfetti(); // 🎊 फूलों की बरसात चालू करो
+  } else {
+    // ❌ Offer Not Available
+    header.innerHTML = '<i class="fa fa-gift"></i> ❌ Not Available — Offer This Time';
+    note.textContent = "फिलहाल कोई Offer उपलब्ध नहीं है। कृपया बाद में चेक करें।";
+    btn.style.display = "none";
+    popup.style.display = "none";
+  }
+});
+
+// 🚀 Redirect Function
+function claimOffer(){ window.location.href = "freeacesssalltoolanadsoftware.html"; }
+// ❌ Close Popup Function
+function closeOffer(){ document.getElementById("offerPopup").style.display = "none"; }
+
+// ========== Confetti + Fireworks Script ==========
+function startConfetti(){
+  const canvas = document.getElementById("confettiCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  const colors = ["#ff0","#f0f","#0ff","#0f0","#f00","#00f","#ffa500","#ff69b4"];
+
+  // Create particles
+  for(let i=0;i<200;i++){
+    particles.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height - canvas.height,
+      r: Math.random()*6+2,
+      d: Math.random()*Math.PI*2,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      tilt: Math.random()*10 - 10
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+      ctx.fill();
+    });
+    update();
+  }
+
+  function update(){
+    particles.forEach(p=>{
+      p.y += Math.cos(p.d)+2;
+      p.x += Math.sin(p.d);
+      if(p.y > canvas.height){
+        p.y = -10;
+        p.x = Math.random()*canvas.width;
+      }
+    });
+  }
+
+  setInterval(draw,20);
+
+  // Fireworks effect
+  function firework(x,y){
+    for(let i=0;i<50;i++){
+      particles.push({
+        x:x,y:y,r:Math.random()*4+2,
+        d:Math.random()*Math.PI*2,
+        color:colors[Math.floor(Math.random()*colors.length)]
+      });
+    }
+  }
+  // चारों कोनों से फायरवर्क्स
+  setInterval(()=>{
+    firework(50,50);
+    firework(canvas.width-50,50);
+    firework(50,canvas.height-50);
+    firework(canvas.width-50,canvas.height-50);
+  },3000);
+}
+</script>
+
+
 </body>
 </html>
