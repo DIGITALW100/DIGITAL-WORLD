@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital World Cyber Café</title>
 
-  <!-- Favicon (browser tab) -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/4ZfgjLNx/cropped-modified.png">
-  <!-- Optional: larger / apple touch -->
   <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/4ZfgjLNx/cropped-modified.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
   <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
     body{
@@ -57,7 +57,7 @@
       text-align:center;
       animation:popIn 1.2s ease;
     }
-    @keyframes popIn{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);}}
+    @keyframes popIn{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);} }
 
     .auth-box h2{
       font-family:Orbitron,sans-serif;
@@ -196,6 +196,7 @@
   </div>
 
 <script>
+  // 👁‍🗨 Show/Hide password
   function togglePass(id, el){
     let input=document.getElementById(id);
     if(input.type==='password'){
@@ -210,12 +211,24 @@
   const loginForm=document.getElementById('loginForm');
   const errorDiv=document.getElementById('error');
 
+  // 🔐 Permanent admin credentials
+  const ADMIN_EMAIL = "digitalworldcybercafe100@gmail.com";
+  const ADMIN_PASS = "Sudhanshu100@112";
+
   loginForm.addEventListener('submit',function(e){
     e.preventDefault();
     const email=document.getElementById('loginEmail').value.trim();
     const pass=document.getElementById('loginPass').value;
     const users=JSON.parse(localStorage.getItem('users')||'{}');
 
+    // ✅ First check permanent admin credentials
+    if(email === ADMIN_EMAIL && pass === ADMIN_PASS){
+      localStorage.setItem('currentUser', email);
+      window.location.href='adminsuccess.html'; // ✅ Admin redirect page
+      return;
+    }
+
+    // ✅ Otherwise check registered users from localStorage
     if(!users[email]){
       errorDiv.textContent='⚠️ Email not registered!';
       return;
@@ -225,10 +238,11 @@
       return;
     }
 
-    // Save current user & redirect
+    // ✅ Save current user & redirect to normal success page
     localStorage.setItem('currentUser',email);
     window.location.href='loginsucess.html';
   });
 </script>
+
 </body>
 </html>
